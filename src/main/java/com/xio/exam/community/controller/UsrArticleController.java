@@ -84,6 +84,17 @@ public class UsrArticleController {
 		return articles;
 	}
 
+	@RequestMapping("/usr/article/getArticle")
+	@ResponseBody
+	public Object getArticle1(int id) {
+		Article article = getArticle(id);
+
+		if (article == null) {
+			return id + " 번 게시물은 존재하지 않습니다.";
+		}
+		return article;
+	}
+
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
 	public String doDelete(int id) {
@@ -109,7 +120,7 @@ public class UsrArticleController {
 
 		modifyArticle(id, title, body);
 
-		return id + "번 게시물을 삭제하였습니다.";
+		return id + "번 게시물을 수정하였습니다.";
 	}
 	// 액션 메서드 끝
 
