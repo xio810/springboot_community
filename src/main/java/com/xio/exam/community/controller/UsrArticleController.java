@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xio.exam.community.vo.Article;
 
-import sun.awt.www.content.audio.wav;
-
 @Controller
 public class UsrArticleController {
-
+	// 인스턴스 변수 시작
 	private int articlesLastId;
 	private List<Article> articles;
+	// 인스턴스 변수 끝
 
+	// 생성자
 	public UsrArticleController() {
 		articlesLastId = 0;
 		articles = new ArrayList<>();
@@ -24,6 +24,7 @@ public class UsrArticleController {
 		makeTestData();
 	}
 
+	// 서비스 메서드 시작
 	private void makeTestData() {
 
 		for (int i = 1; i <= 10; i++) {
@@ -45,10 +46,29 @@ public class UsrArticleController {
 		return article;
 	}
 
+	private Article getArticle(int id) {
+		for (Article article : articles) {
+			if (article.getId() == id) {
+				return article;
+			}
+		}
+		return null;
+	}
+
+	private void deleteArticle(int id) {
+
+		Article article = getArticle(id);
+
+		articles.remove(id);
+
+	}
+	// 서비스 메서드 끝
+
+	// 액션 메서드 시작
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
 	public Article doAdd(String title, String body) {
-		
+
 		Article article = writeArticle(title, body);
 
 		articles.add(article);
@@ -59,8 +79,15 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
 	public String doDelete(int id) {
-		
-		return id +" 번 게시물을 삭제하였습니다.";
+		Article article = getArticle(id);
+
+		if (article == null) {
+			return id + " 번 게시물이 존재하지 않습니다.";
+		}
+
+		deleteArticle(id);
+
+		return id + " 번 게시물을 삭제하였습니다.";
 	}
 
 	@RequestMapping("/usr/article/doModify")
@@ -74,5 +101,5 @@ public class UsrArticleController {
 	public List<Article> getArticles() {
 		return articles;
 	}
-
+	// 액션 메서드 끝
 }
