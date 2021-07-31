@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.xio.exam.community.repository.ArticleRepository;
 import com.xio.exam.community.vo.Article;
+import com.xio.exam.community.vo.Member;
 
 @Service
 public class ArticleService {
@@ -35,4 +36,5 @@ private ArticleRepository articleRepository;
 	public void modifyArticle(int id, String title, String body) {
 		articleRepository.modifyArticle(id, title, body);
 	}
+
 }
