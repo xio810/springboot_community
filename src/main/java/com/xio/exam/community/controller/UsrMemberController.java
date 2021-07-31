@@ -44,11 +44,11 @@ public class UsrMemberController {
 		int id = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
 
 		if (id == -1) {
-			return "해당 아이디는 사용중 입니다.";
+			return Ut.f("해당 아이디(%s)는 사용중 입니다.", loginId);
 		}
-		
-		if(id == -2) {
-			return "해당 이름과 이메일은 사용중 입니다.";
+
+		if (id == -2) {
+			return Ut.f("해당 이름(%s)과 이메일(%s)은 사용중 입니다.", name, email);
 		}
 
 		Member member = memberService.getMemberById(id);
