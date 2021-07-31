@@ -46,6 +46,10 @@ public class UsrMemberController {
 		if (id == -1) {
 			return "해당 아이디는 사용중 입니다.";
 		}
+		
+		if(id == -2) {
+			return "해당 이름과 이메일은 사용중 입니다.";
+		}
 
 		Member member = memberService.getMemberById(id);
 
