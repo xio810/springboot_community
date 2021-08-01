@@ -10,7 +10,7 @@ public class ResultData<DT> {
 	@Getter
 	private DT data1;
 
-	public ResultData() {
+	private ResultData() {
 
 	}
 
@@ -18,9 +18,8 @@ public class ResultData<DT> {
 		return from(resultCode, msg, null);
 	}
 
-	public static <DT>ResultData<DT> from(String resultCode, String msg, DT data1) {
+	public static <DT> ResultData<DT> from(String resultCode, String msg, DT data1) {
 		ResultData<DT> rd = new ResultData<DT>();
-
 		rd.resultCode = resultCode;
 		rd.msg = msg;
 		rd.data1 = data1;
@@ -29,14 +28,14 @@ public class ResultData<DT> {
 	}
 
 	public boolean isSuccess() {
-		return resultCode.startsWith("s-1");
+		return resultCode.startsWith("S-");
 	}
 
 	public boolean isFail() {
 		return isSuccess() == false;
 	}
-	
-	public static <DT>ResultData<DT> newData(ResultData joinRd, DT newData) {
+
+	public static <DT> ResultData<DT> newData(ResultData joinRd, DT newData) {
 		return from(joinRd.getResultCode(), joinRd.getMsg(), newData);
 	}
 }
