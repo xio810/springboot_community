@@ -34,19 +34,19 @@ public class UsrArticleController {
 
 		Article article = articleService.getArticle(id);
 
-		return ResultData.from(writeArticleRd.getResultCode(), writeArticleRd.getMsg(), article);
+		return ResultData.newData(writeArticleRd, article);
 	}
 
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
-	public ResultData getArticles() {
+	public ResultData<List> getArticles() {
 		List<Article> articles = articleService.getArticles();
 		return ResultData.from("S-1", "게시물 리스트 입니다.", articles);
 	}
 
 	@RequestMapping("/usr/article/getArticle")
 	@ResponseBody
-	public ResultData getArticle(int id) {
+	public ResultData<Article> getArticle(int id) {
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
