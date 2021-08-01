@@ -1,40 +1,38 @@
-show databases;
-
+drop database if exists springboot_community;
 create database springboot_community;
-
 use springboot_community;
+show tables;
 
-
-# 게시물 테이블 생성
 CREATE TABLE article (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     title CHAR(100) NOT NULL,
-    body TEXT NOT NULL
+	`body` TEXT NOT NULL
 );
 
-# 게시물, 테스트 데이터 생성
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-title = '제목 1',
-body = '내용 1';
+insert into article
+set regdate = now(),
+updateDate = now(),
+title = '제목1',
+body = '내용1';
 
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-title = '제목 2',
-body = '내용 2';
+insert into article
+set regdate = now(),
+updateDate = now(),
+title = '제목2',
+body = '내용2';
 
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-title = '제목 3',
-body = '내용 3';
+insert into article
+set regdate = now(),
+updateDate = now(),
+title = '제목3',
+body = '내용3';
+
+select * from article;
 
 
- # 회원 테이블 생성
+# 회원 테이블 생성
  CREATE TABLE `member` (
      id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
      regDate DATETIME NOT NULL,
@@ -76,11 +74,16 @@ body = '내용 3';
  INSERT INTO `member`
  SET regDate = NOW(),
  updateDate = NOW(),
- loginId = 'user2',
- loginPw = 'user2',
+ loginId = 'aaa',
+ loginPw = 'aaa',
  `name` = '사용자2',
- nickname = '사용자2',
+ nickname = 'nick aaa',
  cellphoneNo = '01011111111',
  email = 'aaa@gmail.com';
 
- SELECT * FROM `member`
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`;
+
+# 기존 게시물의 작성자를 2번호으로 지정
+UPDATE article
+SET memberId = 2
+WHERE memberId = 0; 
