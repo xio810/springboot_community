@@ -22,25 +22,26 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
 	public ResultData doAdd(String title, String body) {
-		if(Ut.empty(title)) {
+		if (Ut.empty(title)) {
 			return ResultData.from("F-1", "title을 입력해주세요.");
 		}
-		if(Ut.empty(body)) {
+		if (Ut.empty(body)) {
 			return ResultData.from("F-2", "body를 입력해주세요.");
 		}
 		ResultData writeArticleRd = articleService.writeArticle(title, body);
-		
+
 		int id = (int) writeArticleRd.getData1();
-		
+
 		Article article = articleService.getArticle(id);
-		
-		return ResultData.from(writeArticleRd.getResultCode(),writeArticleRd.getMsg(),article);
+
+		return ResultData.from(writeArticleRd.getResultCode(), writeArticleRd.getMsg(), article);
 	}
 
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
-	public List<Article> getArticles() {
-		return articleService.getArticles();
+	public ResultData getArticles() {
+		List<Article> articles = articleService.getArticles();
+		return ResultData.from("S-1", "게시물 리스트 입니다.", articles);
 	}
 
 	@RequestMapping("/usr/article/getArticle")
