@@ -1,13 +1,8 @@
 package com.xio.exam.community.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.xio.exam.community.vo.Article;
 
 @Controller
 public class UsrHomeController {
@@ -32,4 +27,13 @@ public class UsrHomeController {
 //		
 //		return list;
 //	}
+	@RequestMapping("/usr/home/main")
+	public String showMain() {
+		return "usr/home/main";
+	}
+	
+	@RequestMapping("/")
+	public String showRoot() {
+		return "redirect:/usr/home/main";
+	}
 }
