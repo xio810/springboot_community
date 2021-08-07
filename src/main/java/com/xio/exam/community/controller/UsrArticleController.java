@@ -102,7 +102,7 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public ResultData<Integer> doModify(HttpSession httpSession, int id, String title, String body) {
+	public ResultData<Article> doModify(HttpSession httpSession, int id, String title, String body) {
 		boolean isLogined = false;
 		int loginedMemberId = 0;
 
@@ -117,17 +117,22 @@ public class UsrArticleController {
 
 		Article article = articleService.getArticle(id);
 
-		if (article.getMemberId() != loginedMemberId) {
-			return ResultData.from("F-2", "권한이 없습니다.");
-		}
+//		if (article.getMemberId() != loginedMemberId) {
+//			return ResultData.from("F-2", "권한이 없습니다.");
+//		}
 
 		if (article == null) {
 			return ResultData.from("F-1", Ut.f("%d번째 게시물은 존재하지 않습니다.", id));
 		}
 
+		ResultData actorCanModifyRd = articleService.actorCanModifyRd(loginedMemberId, article);
+		
 		articleService.modifyArticle(id, title, body);
-
-		return ResultData.from("S-1", Ut.f("%d번째 게시물이 수정되었습니다.", id), "id", id);
+		
+		if (actorCanModifyRd.isFail()) {
+			return actorCanModifyRd;
+		}
+		return articleService.modifyArticle(id, title, body);
 	}
 	// 액션 메서드 끝
 
