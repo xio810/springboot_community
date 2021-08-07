@@ -14,6 +14,6 @@ spring:
 mybatis:
   type-aliases-package: com.xio.exam.community.vo
 custom:
- logging:
-   dir: log
-   level: debug
+  logging:
+    dir: log
+    level: debug
