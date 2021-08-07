@@ -7,9 +7,19 @@
 <title>list</title>
 </head>
 <body>
-  <h1>list</h1>
-
-  <hr />
+  <h1>리스트 페이지</h1>
+  
+  <header>
+  
+    <a href="/">LOGO</a>
+    
+    <ul>
+    	<li><a href="/">HOME</a></li>
+    	<li><a href="/usr/article/list">LIST</a></li>
+    </ul>
+  
+  
+  </header>
 
   <table border="1">
     <thead>
@@ -21,7 +31,7 @@
         <th>제목</th>
       </tr>
     </thead>
-    <%-- <tbody>
+    <tbody>
       <c:forEach var="article" items="${articles}">
         <tr>
           <td>${article.id}</td>
@@ -33,7 +43,7 @@
           </td>
         </tr>
       </c:forEach>
-    </tbody> --%>
+    </tbody>
   </table>
 
 </body>
