@@ -51,7 +51,7 @@ public class UsrMemberController {
 		}
 
 		Member member = memberService.getMemberById(joinRd.getData1());
-		return ResultData.newData(joinRd, member);
+		return ResultData.newData(joinRd, "member", member);
 	}
 
 	@RequestMapping("/usr/member/doLogin")
@@ -94,7 +94,7 @@ public class UsrMemberController {
 	@ResponseBody
 	public ResultData doLogout(HttpSession httpSession) {
 		boolean isLogined = false;
-		
+
 		if (httpSession.getAttribute("loginedMemberId") == null) {
 			isLogined = true;
 		}
