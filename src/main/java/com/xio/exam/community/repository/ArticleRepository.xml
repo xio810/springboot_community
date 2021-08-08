@@ -13,13 +13,6 @@
 		`body` = #{body}
 	</insert>
 
-	<select id="getArticles" resultType="Article">
-		select * from article
-		order
-		by
-		id DESC
-	</select>
-
 	<select id="getArticle" resultType="Article">
 		select * from article
 		where id
