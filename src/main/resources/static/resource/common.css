@@ -1,26 +1,33 @@
 @font-face {
-     font-family: 'DungGeunMo';
-     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
-     font-weight: normal;
-     font-style: normal;
-}
-@font-face {
-    font-family: 'Chosunilbo_myungjo';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff');
+    font-family: 'NEXONFootballGothicBA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXONFootballGothicBA1.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
-html > body {
-	 font-family: 'Chosunilbo_myungjo';
-} 
+
+@font-face {
+		font-family: 'Chosunilbo_myungjo';
+		src:
+				url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff')
+				format('woff');
+		font-weight: normal;
+		font-style: normal;
+}
+
+html>body {
+		 font-family: 'NEXONFootballGothicBA1';
+}
 
 /* 라이브러리 */
- .table-box-type-1 > table {
-   width:100%;
- }
+.table-box-type-1>table {
+		width: 100%;
+}
 
- .table-box-type-1 > table th,
- .table-box-type-1 > table td {
-   border:1px solid black;
-   padding:10px;
- }
+.table-box-type-1>table th, .table-box-type-1>table td {
+		border: 1px solid black;
+		padding: 10px;
+}
+
+.btn-text-link {
+	color: #66D7C6;
+}
