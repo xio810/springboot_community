@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="게시물 수정 " />
+<c:set var="pageTitle" value="게시물 수정" />
 <%@ include file="../common/head.jspf"%>
-
 
 <section class="mt-5">
   <div class="container mx-auto px-3">
-    <div class="table-box-type-1">
+    <form class="table-box-type-1" method="POST" action="../article/doModify">
+      <input type="hidden" name="id" value="${article.id}" />
       <table>
         <colgroup>
           <col width="200" />
@@ -50,7 +50,7 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </form>
 
     <div class="btns">
       <button class="btn-text-link" type="button" onclick="history.back();">뒤로가기</button>

@@ -21,7 +21,7 @@ public class UsrArticleController {
 	@Autowired
 	private ArticleService articleService;
 
-	// 액션 메서드
+	// 액션 메서드 시작
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
 	public ResultData<Article> doAdd(HttpServletRequest req, String title, String body) {
@@ -106,7 +106,7 @@ public class UsrArticleController {
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		if (article == null) {
-			ResultData.from("F-1", Ut.f("%d번 게시물이 존재하지 않습니다.", id));
+			return rq.historyBackJsOnView(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
 		}
 
 		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
@@ -114,10 +114,10 @@ public class UsrArticleController {
 		if (actorCanModifyRd.isFail()) {
 			return rq.historyBackJsOnView(actorCanModifyRd.getMsg());
 		}
-		
+
 		model.addAttribute("article", article);
 
-		return "/usr/article/modify";
+		return "usr/article/modify";
 	}
 
 	@RequestMapping("/usr/article/doModify")
@@ -128,16 +128,18 @@ public class UsrArticleController {
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		if (article == null) {
-			Ut.jsHistoryBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
+			return Ut.jsHistoryBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
 		}
 
 		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
-		
-		if (actorCanModifyRd.isFail()) {
- 			return Ut.jsHistoryBack(actorCanModifyRd.getMsg());
- 		}
 
-		return Ut.jsReplace(Ut.f("%d번 째 글이 수정되었습니다.", id), Ut.f("../article/detail?id=%d", id));
+		if (actorCanModifyRd.isFail()) {
+			return Ut.jsHistoryBack(actorCanModifyRd.getMsg());
+		}
+
+		articleService.modifyArticle(id, title, body);
+
+		return Ut.jsReplace(Ut.f("%d번 글이 수정되었습니다.", id), Ut.f("../article/detail?id=%d", id));
 	}
 	// 액션 메서드 끝
 }
