@@ -21,12 +21,11 @@ public class UsrArticleController {
 	@Autowired
 	private ArticleService articleService;
 
-	// 액션 메서드 
+	// 액션 메서드
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
 	public ResultData<Article> doAdd(HttpServletRequest req, String title, String body) {
 		Rq rq = (Rq) req.getAttribute("rq");
-
 
 		if (Ut.empty(title)) {
 			return ResultData.from("F-1", "title(을)를 입력해주세요.");
@@ -85,7 +84,6 @@ public class UsrArticleController {
 	public String doDelete(HttpServletRequest req, int id) {
 		Rq rq = (Rq) req.getAttribute("rq");
 
-
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		if (article == null) {
@@ -100,12 +98,11 @@ public class UsrArticleController {
 
 		return Ut.jsReplace(Ut.f("%d번 게시물을 삭제하였습니다.", id), "../article/list");
 	}
-	
-	
+
 	@RequestMapping("/usr/article/modify")
-	public String doModify (HttpServletRequest req, int id) {
+	public String showModify(HttpServletRequest req, Model model, int id) {
 		Rq rq = (Rq) req.getAttribute("rq");
-		
+
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		if (article == null) {
@@ -117,10 +114,12 @@ public class UsrArticleController {
 		if (actorCanModifyRd.isFail()) {
 			return rq.historyBackJsOnView(actorCanModifyRd.getMsg());
 		}
+		
+		model.addAttribute("article", article);
 
 		return "/usr/article/modify";
 	}
-	
+
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
 	public ResultData<Article> doModify(HttpServletRequest req, int id, String title, String body) {
