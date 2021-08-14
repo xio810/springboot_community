@@ -21,7 +21,7 @@ public class UsrArticleController {
 	@Autowired
 	private ArticleService articleService;
 
-	// 액션 메서드 시작
+	// 액션 메서드 
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
 	public ResultData<Article> doAdd(HttpServletRequest req, String title, String body) {
