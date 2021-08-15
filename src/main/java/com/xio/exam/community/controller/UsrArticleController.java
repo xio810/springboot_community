@@ -46,14 +46,7 @@ public class UsrArticleController {
 	//////
 	@RequestMapping("/usr/article/write")
 	public String showWrite(HttpServletRequest req) {
-		Rq rq = (Rq) req.getAttribute("rq");
 		
-//		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
-//
-//		if (article.getMemberId() != rq.getLoginedMemberId()) {
-//			return Ut.jsHistoryBack("권한이 없습니다.");
-//		}
-//		
 		return "usr/article/write";
 	}
 	/////
