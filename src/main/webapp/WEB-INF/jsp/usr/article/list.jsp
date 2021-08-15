@@ -38,6 +38,7 @@
           </c:forEach>
         </tbody>
       </table>
+      <div><a href="../article/write">글쓰기</a></div>
     </div>
   </div>
 </section>

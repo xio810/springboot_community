@@ -3,6 +3,7 @@ package com.xio.exam.community.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,15 +25,15 @@ public class UsrArticleController {
 	// 액션 메서드 시작
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public ResultData<Article> doAdd(HttpServletRequest req, String title, String body) {
+	public String doAdd(HttpServletRequest req, String title, String body) {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (Ut.empty(title)) {
-			return ResultData.from("F-1", "title(을)를 입력해주세요.");
+			return Ut.jsHistoryBack("title(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(body)) {
-			return ResultData.from("F-2", "body(을)를 입력해주세요.");
+			return Ut.jsHistoryBack("body(을)를 입력해주세요.");
 		}
 
 		ResultData<Integer> writeArticleRd = articleService.writeArticle(rq.getLoginedMemberId(), title, body);
@@ -40,9 +41,22 @@ public class UsrArticleController {
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
-		return ResultData.newData(writeArticleRd, "article", article);
+		return Ut.jsReplace("게시물 작성", "../article/list");
 	}
-
+	//////
+	@RequestMapping("/usr/article/write")
+	public String showWrite(HttpServletRequest req) {
+		Rq rq = (Rq) req.getAttribute("rq");
+		
+//		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
+//
+//		if (article.getMemberId() != rq.getLoginedMemberId()) {
+//			return Ut.jsHistoryBack("권한이 없습니다.");
+//		}
+//		
+		return "usr/article/write";
+	}
+	/////
 	@RequestMapping("/usr/article/list")
 	public String showList(HttpServletRequest req, Model model) {
 		Rq rq = (Rq) req.getAttribute("rq");
