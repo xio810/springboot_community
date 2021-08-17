@@ -13,9 +13,9 @@
 <!-- 노말라이즈, 라이브러리까지 한방에 해결 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" />
 
- <!-- 데이지 UI -->
- <link href="https://cdn.jsdelivr.net/npm/daisyui@1.11.1/dist/full.css" rel="stylesheet" type="text/css" />
- 
+<!-- 데이지 UI -->
+<link href="https://cdn.jsdelivr.net/npm/daisyui@1.11.1/dist/full.css" rel="stylesheet" type="text/css" />
+
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
@@ -40,8 +40,13 @@
           </a>
         </li>
         <li>
+          <a class="h-full flex px-3 items-center hover:underline" href="/usr/article/write">
+            <span>작성</span>
+          </a>
+        </li>
+        <li>
           <a class="h-full flex px-3 items-center hover:underline" href="/usr/article/list">
-            <span>리스트</span>
+            <span>게시글</span>
           </a>
         </li>
         <c:if test="${!rq.isLogined()}">

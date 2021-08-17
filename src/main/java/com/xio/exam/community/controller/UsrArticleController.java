@@ -43,12 +43,14 @@ public class UsrArticleController {
 
 		return Ut.jsReplace("게시물 작성", "../article/list");
 	}
+
 	//////
 	@RequestMapping("/usr/article/write")
-	public String showWrite(HttpServletRequest req) {
-		
+	public String showWrite(HttpServletRequest req, Model model) {
+
 		return "usr/article/write";
 	}
+
 	/////
 	@RequestMapping("/usr/article/list")
 	public String showList(HttpServletRequest req, Model model) {
