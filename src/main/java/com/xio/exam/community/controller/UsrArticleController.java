@@ -4,24 +4,56 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xio.exam.community.service.ArticleService;
+import com.xio.exam.community.service.BoardService;
 import com.xio.exam.community.util.Ut;
 import com.xio.exam.community.vo.Article;
+import com.xio.exam.community.vo.Board;
 import com.xio.exam.community.vo.ResultData;
 import com.xio.exam.community.vo.Rq;
 
 @Controller
 public class UsrArticleController {
-	@Autowired
+
 	private ArticleService articleService;
+	private BoardService boardService;
+
+	public UsrArticleController(ArticleService articleService, BoardService boardService) {
+		this.articleService = articleService;
+		this.boardService = boardService;
+	}
 
 	// 액션 메서드 시작
+	@RequestMapping("/usr/article/list")
+	public String showList(HttpServletRequest req, Model model, int boardId) {
+		Board board = boardService.getBoardById(boardId);
+
+		Rq rq = (Rq) req.getAttribute("rq");
+
+		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId());
+
+		model.addAttribute("board", board);
+		model.addAttribute("articles", articles);
+
+		return "usr/article/list";
+	}
+
+	@RequestMapping("/usr/article/detail")
+	public String showDetail(HttpServletRequest req, Model model, int id) {
+		Rq rq = (Rq) req.getAttribute("rq");
+
+		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
+
+		model.addAttribute("article", article);
+
+		return "usr/article/detail";
+	}
+
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
 	public String doWrite(HttpServletRequest req, String title, String body, String replaceUri) {
@@ -38,7 +70,7 @@ public class UsrArticleController {
 		ResultData<Integer> writeArticleRd = articleService.writeArticle(rq.getLoginedMemberId(), title, body);
 		int id = writeArticleRd.getData1();
 
-		if(Ut.empty(replaceUri)) {
+		if (Ut.empty(replaceUri)) {
 			replaceUri = Ut.f("../article/detail?id=%d", id);
 		}
 
@@ -53,27 +85,6 @@ public class UsrArticleController {
 	}
 
 	/////
-	@RequestMapping("/usr/article/list")
-	public String showList(HttpServletRequest req, Model model) {
-		Rq rq = (Rq) req.getAttribute("rq");
-
-		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId());
-
-		model.addAttribute("articles", articles);
-
-		return "usr/article/list";
-	}
-
-	@RequestMapping("/usr/article/detail")
-	public String showDetail(HttpServletRequest req, Model model, int id) {
-		Rq rq = (Rq) req.getAttribute("rq");
-
-		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
-
-		model.addAttribute("article", article);
-
-		return "usr/article/detail";
-	}
 
 	@RequestMapping("/usr/article/getArticle")
 	@ResponseBody
