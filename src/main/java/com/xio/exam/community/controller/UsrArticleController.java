@@ -31,10 +31,13 @@ public class UsrArticleController {
 	// 액션 메서드 시작
 	@RequestMapping("/usr/article/list")
 	public String showList(HttpServletRequest req, Model model, int boardId) {
-		Board board = boardService.getBoardById(boardId);
-
 		Rq rq = (Rq) req.getAttribute("rq");
 
+		Board board = boardService.getBoardById(boardId);
+
+		if (board == null) {
+			return rq.historyBackJsOnView(Ut.f("%d번 게시판이 존재하지 않습니다.", boardId));
+		}
 		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId());
 
 		model.addAttribute("board", board);
