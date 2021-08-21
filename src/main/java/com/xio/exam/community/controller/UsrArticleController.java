@@ -19,18 +19,16 @@ import com.xio.exam.community.vo.Rq;
 
 @Controller
 public class UsrArticleController {
-
 	private ArticleService articleService;
 	private BoardService boardService;
 	private Rq rq;
-
-	public UsrArticleController(ArticleService articleService, BoardService boardService) {
+	
+	public UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
 		this.rq = rq;
 	}
 
-	// 액션 메서드 시작
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, int boardId) {
 		Board board = boardService.getBoardById(boardId);

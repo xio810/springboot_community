@@ -9,6 +9,7 @@
 		set regDate = now(),
 		updateDate = now(),
 		memberId = #{memberId},
+		boardId = #{boardId},
 		title = #{title},
 		`body` = #{body}
 	</insert>

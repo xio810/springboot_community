@@ -10,7 +10,7 @@ import com.xio.exam.community.vo.Article;
 
 @Mapper
 public interface ArticleRepository {
-	public void writeArticle(@Param("memberId") int memberId, @Param("title") String title, @Param("body") String body);
+	public void writeArticle(@Param("memberId") int memberId, int boardId, @Param("title") String title, @Param("body") String body);
 	
 	@Select("""
  			SELECT A.*,
