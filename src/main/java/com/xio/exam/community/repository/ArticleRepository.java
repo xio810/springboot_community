@@ -10,41 +10,42 @@ import com.xio.exam.community.vo.Article;
 
 @Mapper
 public interface ArticleRepository {
-	public void writeArticle(@Param("memberId") int memberId, int boardId, @Param("title") String title, @Param("body") String body);
-	
-	@Select("""
- 			SELECT A.*,
- 			M.nickname AS extra__writerName
- 			FROM article AS A
- 			LEFT JOIN member AS M
- 			ON A.memberId = M.id
- 			WHERE 1
- 			AND A.id = #{id}
- 			""")
-	public Article getForPrintArticle(@Param("id") int id);
-	
+	public void writeArticle(@Param("memberId") int memberId, int boardId, @Param("title") String title,
+			@Param("body") String body);
 
 	@Select("""
- 			<script>
- 			SELECT A.*,
- 			M.nickname AS extra__writerName
- 			FROM article AS A
- 			LEFT JOIN member AS M
- 			ON A.memberId = M.id
- 			WHERE 1
- 			<if test = "boardId != 0">
- 				AND A.boardId = #{boardId}
- 			</if>
- 			ORDER BY A.id DESC
- 			<if test="limitTake != -1">
- 				LIMIT #{limitStart}, #{limitTake}
- 			</if>
- 			</script>
- 			""")
-	public List<Article> getArticles(@Param("boardId") int boardId,@Param("limitStart") int limitStart, @Param("limitTake") int limitTake);
-	
+			SELECT A.*,
+			M.nickname AS extra__writerName
+			FROM article AS A
+			LEFT JOIN member AS M
+			ON A.memberId = M.id
+			WHERE 1
+			AND A.id = #{id}
+			""")
+	public Article getForPrintArticle(@Param("id") int id);
+
+	@Select("""
+			<script>
+			SELECT A.*,
+			M.nickname AS extra__writerName
+			FROM article AS A
+			LEFT JOIN member AS M
+			ON A.memberId = M.id
+			WHERE 1
+			<if test = "boardId != 0">
+				AND A.boardId = #{boardId}
+			</if>
+			ORDER BY A.id DESC
+			<if test="limitTake != -1">
+				LIMIT #{limitStart}, #{limitTake}
+			</if>
+			</script>
+			""")
+	public List<Article> getArticles(@Param("boardId") int boardId, @Param("limitStart") int limitStart,
+			@Param("limitTake") int limitTake);
+
 	public int getLastInsertId();
-	
+
 	public void deleteArticle(@Param("id") int id);
 
 	public void modifyArticle(@Param("id") int id, @Param("title") String title, @Param("body") String body);

@@ -40,25 +40,25 @@
         </tbody>
       </table>
     </div>
-    <div class="page-menu mt-5 mb-4">
+    <div class="page-menu mt-5">
       <div class="btn-group justify-center">
-        <c:set var="pageMenuArmLen" value="4" />
+        <c:set var="pageMenuArmLen" value="6" />
         <c:set var="startPage" value="${page - pageMenuArmLen >= 1 ? page - pageMenuArmLen : 1}" />
         <c:set var="endPage" value="${page + pageMenuArmLen <= pagesCount ? page + pageMenuArmLen : pagesCount}" />
 
-       <c:if test="${startPage > 1}">
+        <c:if test="${startPage > 1}">
           <a class="btn btn-sm" href="?page=1&boardId=${boardId}">1</a>
-          <c:if test="${startPage > 2}">          
+          <c:if test="${startPage > 2}">
             <a class="btn btn-sm btn-disabled">...</a>
           </c:if>
         </c:if>
         <c:forEach begin="${startPage}" end="${endPage}" var="i">
           <a class="btn btn-sm ${page == i ? 'btn-active' : ''}" href="?page=${i}&boardId=${boardId}">${i}</a>
         </c:forEach>
-         <c:if test="${endPage < pagesCount}">
+        <c:if test="${endPage < pagesCount}">
           <c:if test="${endPage < pagesCount - 1}">
             <a class="btn btn-sm btn-disabled">...</a>
-          </c:if> 
+          </c:if>
           <a class="btn btn-sm" href="?page=${pagesCount}&boardId=${boardId}">${pagesCount}</a>
         </c:if>
       </div>
