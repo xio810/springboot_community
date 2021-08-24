@@ -282,3 +282,7 @@ WHERE memberId = 0;
 select now(), now(), FLOOR(RAND() * 2) + 1, FLOOR(RAND() * 2) + 1, concat('제목_', rand()), CONCAT('내용_', RAND())
 from article;
 */
+
+ #게시물 테이블 조회수 hitCount 추가 
+alter table article 
+add column hitCount int(10) unsigned not null default 0;
