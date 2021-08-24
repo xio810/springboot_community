@@ -1,7 +1,9 @@
 package com.xio.exam.community.vo;
 
 import lombok.Getter;
+import lombok.ToString;
 
+@ToString
 public class ResultData<DT> {
 	@Getter
 	private String resultCode;
