@@ -31,9 +31,16 @@ html>body {
 }
 
 .btn-text-link {
-		color: #66D7C6;
+		color: black;
 }
 
+.btn-text-link:hover {
+		text-decoration: underline;
+}
+
+.btn-text-link:visited {
+		color: #66D7C6;
+}
 /* 커스텀 */
 body {
 		min-width: 800px;

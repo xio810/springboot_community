@@ -14,6 +14,6 @@ public interface BoardRepository {
  			WHERE B.id = #{id}
  			AND B.delStatus = 0
 			""")
-	public Board getBoardById(@Param("id") int id);
+	public Board getBoardById(int id);
 
 }

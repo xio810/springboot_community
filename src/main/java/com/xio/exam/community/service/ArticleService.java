@@ -26,6 +26,7 @@ public class ArticleService {
 
 	public List<Article> getForPrintArticles(int actorId, int boardId, String searchKeywordTypeCode,
 			String searchKeyword, int itemsCountInAPage, int page) {
+		
 		int limitStart = (page - 1) * itemsCountInAPage;
 		int limitTake = itemsCountInAPage;
 
