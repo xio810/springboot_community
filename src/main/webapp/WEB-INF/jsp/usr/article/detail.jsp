@@ -68,10 +68,16 @@
               <span class="badge badge-primary article-detail__hit-count">${article.hitCount}</span>
             </td>
           </tr>
-           <tr>
+          <tr>
             <th>추천</th>
             <td>
-              <span class="badge badge-primary">${article.extra__goodReactionPoint}</span>
+              <div class="flex items-center">
+                <span class="badge badge-primary">${article.extra__goodReactionPoint}</span>
+                <c:if test="${actorCanMakeReactionPoint}">
+                  <button class="btn btn-xs btn-primary ml-1">좋아요 👍️</button>
+                  <button class="btn btn-xs btn-secondary ml-1">싫어요 👎️</button>
+                </c:if>
+              </div>
             </td>
           </tr>
           <tr>
