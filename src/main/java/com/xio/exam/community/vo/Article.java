@@ -15,16 +15,24 @@ public class Article {
 	private String title;
 	private String body;
 	private int hitCount;
-	
+
 	private String extra__writerName;
 	private boolean extra__actorCanDelete;
 	private boolean extra__actorCanModify;
-	
-	public String getRegDateForPrint() {
- 		return regDate.substring(2, 16);
- 	}
 
- 	public String getUpdateDateForPrint() {
- 		return updateDate.substring(2, 16);
- 	}
+	public String getForPrintType1RegDate() {
+		return regDate.substring(2, 16).replace(" ", "<br>");
+	}
+
+	public String getForPrintType1UpdateDate() {
+		return regDate.substring(2, 16).replace(" ", "<br>");
+	}
+
+	public String getForPrintType2RegDate() {
+		return regDate.substring(2, 16);
+	}
+
+	public String getForPrintType2UpdateDate() {
+		return updateDate.substring(2, 16);
+	}
 }
