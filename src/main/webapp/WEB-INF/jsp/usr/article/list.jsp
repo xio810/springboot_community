@@ -4,6 +4,7 @@
 <c:set var="pageTitle" value="${board.name} 게시물 리스트" />
 <%@ include file="../common/head.jspf"%>
 
+<!-- 시작 -->
 <section class="mt-5">
   <div class="container mx-auto px-3">
     <div class="flex">
@@ -13,6 +14,7 @@
         개
       </div>
 
+      <!-- 검색 -->
       <div class="flex-grow"></div>
       <form class="flex">
         <input type="hidden" name="boardId" value="${param.boardId}" />
@@ -26,10 +28,12 @@
 
         <input name="searchKeyword" type="text" class="ml-2 w-72 input input-bordered" placeholder="검색어" maxlength="28"
           value="${param.searchKeyword}" />
-          
-          <button type="submit" class="ml-2 btn btn-primary">검색</button>
+
+        <button type="submit" class="ml-2 btn btn-primary">검색</button>
       </form>
     </div>
+
+    <!-- 테이블 -->
     <div class="mt-3">
       <table class="table table-fixed w-full">
         <colgroup>
@@ -64,6 +68,7 @@
       </table>
     </div>
 
+    <!-- 게시물 숫자 -->
     <div class="page-menu mt-3">
       <div class="btn-group justify-center">
         <c:set var="pageMenuArmLen" value="6" />
