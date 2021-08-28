@@ -32,6 +32,20 @@
             <td>${article.extra__writerName}</td>
           </tr>
           <tr>
+          <tr>
+            <th>조회수</th>
+            <td>
+              <span class="badge badge-primary">${article.hitCount}</span>
+            </td>
+          </tr>
+          <tr>
+            <th>추천</th>
+            <td>
+              <span class="badge badge-primary">${article.extra__goodReactionPoint}</span>
+            </td>
+          </tr>
+          <tr>
+          <tr>
             <th>제목</th>
             <td>
               <input class="w-96 input input-bordered" name="title" type="text" placeholder="제목"
