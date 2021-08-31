@@ -72,7 +72,7 @@
             <th>추천</th>
             <td>
               <div class="flex items-center">
-                <span class="badge badge-primary">${article.extra__goodReactionPoint}</span>
+                <span class="badge badge-primary">${article.goodReactionPoint}</span>
                 <c:if test="${actorCanMakeReactionPoint}">
                   <button class="btn btn-xs btn-primary ml-1">좋아요 👍️</button>
                   <button class="btn btn-xs btn-secondary ml-1">싫어요 👎️</button>
