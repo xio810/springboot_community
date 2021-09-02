@@ -74,8 +74,12 @@
               <div class="flex items-center">
                 <span class="badge badge-primary">${article.goodReactionPoint}</span>
                 <c:if test="${actorCanMakeReactionPoint}">
-                  <button class="btn btn-xs btn-primary ml-1">좋아요 👍️</button>
-                  <button class="btn btn-xs btn-secondary ml-1">싫어요 👎️</button>
+                  <a
+                    href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+                    class="btn btn-xs btn-primary ml-1">좋아요 👍️</a>
+                  <a
+                    href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id}&replaceUri=${rq.encodedCurrentUri}"
+                    class="btn btn-xs btn-secondary ml-1">싫어요 👎️</a>
                 </c:if>
               </div>
             </td>

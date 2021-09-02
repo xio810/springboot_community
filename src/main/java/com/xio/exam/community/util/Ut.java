@@ -1,5 +1,7 @@
 package com.xio.exam.community.util;
 
+import java.net.URLEncoder;
+
 public class Ut {
 	public static boolean empty(Object obj) {
 		if (obj == null) {
@@ -54,4 +56,12 @@ public class Ut {
 				</script>
 				""", msg, uri);
 	}
+
+	 public static String getUriEncoded(String str) {
+	        try {
+	            return URLEncoder.encode(str, "UTF-8");
+	        } catch (Exception e) {
+	            return str;
+	        }
+	    }
 }

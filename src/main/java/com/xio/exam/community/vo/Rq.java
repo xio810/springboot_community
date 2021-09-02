@@ -15,7 +15,6 @@ import com.xio.exam.community.util.Ut;
 
 import lombok.Getter;
 
-
 @Component
 @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
@@ -49,7 +48,7 @@ public class Rq {
 		this.isLogined = isLogined;
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;
-		
+
 		this.req.setAttribute("rq", this);
 	}
 
@@ -92,8 +91,23 @@ public class Rq {
 		return Ut.jsReplace(msg, uri);
 	}
 
+	public String getCurrentUri() {
+		String currentUri = req.getRequestURI();
+		String queryString = req.getQueryString();
+
+		if (queryString != null && queryString.length() > 0) {
+			currentUri += "?" + queryString;
+		}
+
+		return currentUri;
+	}
+
+	public String getEncodedCurrentUri() {
+		return Ut.getUriEncoded(getCurrentUri());
+	}
+
 	public void initOnBeforeActionInterceptor() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
