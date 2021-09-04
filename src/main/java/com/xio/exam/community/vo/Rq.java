@@ -64,7 +64,11 @@ public class Rq {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public boolean isNotLogined() {
+		return !isLogined;
+	}
+	
 	public void println(String str) {
 		print(str + "\n");
 	}
