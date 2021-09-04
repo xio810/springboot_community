@@ -8,6 +8,14 @@ public class Ut {
 			return true;
 		}
 
+		if (obj instanceof Integer) {
+			return ((int) obj) == 0;
+		}
+
+		if (obj instanceof Long) {
+			return ((long) obj) == 0;
+		}
+
 		if (obj instanceof String == false) {
 			return true;
 		}
@@ -57,11 +65,11 @@ public class Ut {
 				""", msg, uri);
 	}
 
-	 public static String getUriEncoded(String str) {
-	        try {
-	            return URLEncoder.encode(str, "UTF-8");
-	        } catch (Exception e) {
-	            return str;
-	        }
-	    }
+	public static String getUriEncoded(String str) {
+		try {
+			return URLEncoder.encode(str, "UTF-8");
+		} catch (Exception e) {
+			return str;
+		}
+	}
 }
