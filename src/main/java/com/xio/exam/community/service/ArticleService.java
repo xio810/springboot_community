@@ -26,7 +26,6 @@ public class ArticleService {
 
 	public List<Article> getForPrintArticles(int actorId, int boardId, String searchKeywordTypeCode,
 			String searchKeyword, int itemsCountInAPage, int page) {
-
 		int limitStart = (page - 1) * itemsCountInAPage;
 		int limitTake = itemsCountInAPage;
 
@@ -106,6 +105,7 @@ public class ArticleService {
 		if (affectedRowsCount == 0) {
 			return ResultData.from("F-1", "해당 게시물이 존재하지 않습니다.", "affectedRowsCount", affectedRowsCount);
 		}
+
 		return ResultData.from("S-1", "조회수가 증가되었습니다.", "affectedRowsCount", affectedRowsCount);
 	}
 
@@ -132,5 +132,4 @@ public class ArticleService {
 
 		return ResultData.from("S-1", "싫어요 수가 증가되었습니다.", "affectedRowsCount", affectedRowsCount);
 	}
-
 }

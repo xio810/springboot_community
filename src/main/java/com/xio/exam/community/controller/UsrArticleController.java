@@ -38,7 +38,6 @@ public class UsrArticleController {
 	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
 			@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,
 			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page) {
-
 		Board board = boardService.getBoardById(boardId);
 
 		if (board == null) {
@@ -49,7 +48,6 @@ public class UsrArticleController {
 
 		int itemsCountInAPage = 10;
 		int pagesCount = (int) Math.ceil((double) articlesCount / itemsCountInAPage);
-
 		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId(), boardId,
 				searchKeywordTypeCode, searchKeyword, itemsCountInAPage, page);
 
@@ -65,7 +63,6 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
-
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
 		model.addAttribute("article", article);
@@ -88,7 +85,6 @@ public class UsrArticleController {
 		return "usr/article/detail";
 	}
 
-	//
 	@RequestMapping("/usr/article/doIncreaseHitCountRd")
 	@ResponseBody
 	public ResultData<Integer> doIncreaseHitCountRd(int id) {
@@ -106,7 +102,6 @@ public class UsrArticleController {
 		return rd;
 	}
 
-	//
 	@RequestMapping("/usr/article/getArticle")
 	@ResponseBody
 	public ResultData<Article> getArticle(int id) {
@@ -119,7 +114,6 @@ public class UsrArticleController {
 		return ResultData.from("S-1", Ut.f("%d번 게시물입니다.", id), "article", article);
 	}
 
-	//
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
 	public String doDelete(int id) {

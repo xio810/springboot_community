@@ -101,9 +101,9 @@ public interface ArticleRepository {
 
 	@Update("""
 			<script>
-			update article
-			set hitCount = hitCount + 1
-			where id = #{id}
+			UPDATE article
+			SET hitCount = hitCount + 1
+			WHERE id = #{id}
 			</script>
 			""")
 	public int increaseHitCount(int id);
@@ -124,7 +124,7 @@ public interface ArticleRepository {
 			WHERE id = #{id}
 			</script>
 			""")
-	public int increaseGoodReactionPoint(int relId);
+	public int increaseGoodReactionPoint(int id);
 
 	@Update("""
 			<script>
@@ -134,5 +134,4 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int increaseBadReactionPoint(int id);
-
 }
