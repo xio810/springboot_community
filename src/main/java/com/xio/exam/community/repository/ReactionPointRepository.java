@@ -28,7 +28,7 @@ public interface ReactionPointRepository {
 			`point` = 1
 			""")
 	void addGoodReactionPoint(int memberId, String relTypeCode, int relId);
-	
+
 	@Insert("""
 			insert into reactionPoint
 			set regDate = now(),
@@ -41,11 +41,11 @@ public interface ReactionPointRepository {
 	void addBadReactionPoint(int memberId, String relTypeCode, int relId);
 
 	@Delete("""
- 			DELETE FROM reactionPoint
- 			WHERE relTypeCode = #{relTypeCode}
- 			AND relId = #{relId}
- 			AND memberId = #{memberId}
- 			""")
+			DELETE FROM reactionPoint
+			WHERE relTypeCode = #{relTypeCode}
+			AND relId = #{relId}
+			AND memberId = #{memberId}
+			""")
 	void deleteReactionPoint(int memberId, String relTypeCode, int relId);
 
 }
