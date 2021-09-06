@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.xio.exam.community.service.ArticleService;
 import com.xio.exam.community.service.BoardService;
 import com.xio.exam.community.service.ReactionPointService;
+import com.xio.exam.community.service.ReplyService;
 import com.xio.exam.community.util.Ut;
 import com.xio.exam.community.vo.Article;
 import com.xio.exam.community.vo.Board;
+import com.xio.exam.community.vo.Reply;
 import com.xio.exam.community.vo.ResultData;
 import com.xio.exam.community.vo.Rq;
 
@@ -24,13 +26,15 @@ public class UsrArticleController {
 	private ArticleService articleService;
 	private BoardService boardService;
 	private ReactionPointService reactionPointService;
+	private ReplyService replyService;
 	private Rq rq;
 
 	public UsrArticleController(ArticleService articleService, BoardService boardService,
-			ReactionPointService reactionPointService, Rq rq) {
+			ReactionPointService reactionPointService, ReplyService replyService, Rq rq) {
 		this.articleService = articleService;
 		this.boardService = boardService;
 		this.reactionPointService = reactionPointService;
+		this.replyService = replyService;
 		this.rq = rq;
 	}
 
@@ -65,7 +69,11 @@ public class UsrArticleController {
 	public String showDetail(Model model, int id) {
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
+		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMember(), "article", id);
+		int repliesCount = replies.size();
+
 		model.addAttribute("article", article);
+		model.addAttribute("repliesCount", repliesCount);
 
 		ResultData actorCanMakeReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(),
 				"article", id);

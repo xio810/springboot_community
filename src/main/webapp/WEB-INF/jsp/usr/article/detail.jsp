@@ -199,5 +199,10 @@
      </c:if>
   </div>
 </section>
+<section class="mt-s">
+  <div class="container mx-auto px-3">
+    <h1>댓글 [${repliesCount}]</h1>
+  </div>
+</section>
 
 <%@ include file="../common/foot.jspf"%>
