@@ -17,7 +17,7 @@ public class Article {
 	private int hitCount;
 	private int goodReactionPoint;
 	private int badReactionPoint;
-	
+
 	private String extra__writerName;
 	private boolean extra__actorCanDelete;
 	private boolean extra__actorCanModify;
@@ -36,5 +36,9 @@ public class Article {
 
 	public String getForPrintType2UpdateDate() {
 		return updateDate.substring(2, 16);
+	}
+
+	public String getForPrintBody() {
+		return body.replaceAll("\n", "<br>");
 	}
 }

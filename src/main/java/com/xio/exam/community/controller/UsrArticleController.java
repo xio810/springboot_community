@@ -73,7 +73,7 @@ public class UsrArticleController {
 		int repliesCount = replies.size();
 
 		model.addAttribute("article", article);
-		model.addAttribute("repliesCount", repliesCount);
+		model.addAttribute("replies", replies);
 
 		ResultData actorCanMakeReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(),
 				"article", id);
