@@ -1,11 +1,14 @@
 package com.xio.exam.community.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xio.exam.community.service.ArticleService;
 import com.xio.exam.community.service.ReplyService;
 import com.xio.exam.community.util.Ut;
+import com.xio.exam.community.vo.Article;
 import com.xio.exam.community.vo.Reply;
 import com.xio.exam.community.vo.ResultData;
 import com.xio.exam.community.vo.Rq;
@@ -14,10 +17,42 @@ import com.xio.exam.community.vo.Rq;
 public class UsrReplyController {
 	private Rq rq;
 	private ReplyService replyService;
+	private ArticleService articleService;
 
-	public UsrReplyController(Rq rq, ReplyService replyService) {
+	public UsrReplyController(Rq rq, ReplyService replyService, ArticleService articleService) {
 		this.rq = rq;
 		this.replyService = replyService;
+		this.articleService = articleService;
+	}
+
+	@RequestMapping("/usr/reply/modify")
+	public String modify(int id, String replaceUri, Model model) {
+		if (Ut.empty(id)) {
+			return rq.jsHistoryBack("id(을)를 입력해주세요.");
+		}
+
+		Reply reply = replyService.getForPrintReply(rq.getLoginedMember(), id);
+
+		if (reply == null) {
+			return rq.historyBackJsOnView(Ut.f("%d번 댓글은 존재하지 않습니다.", id));
+		}
+
+		if (reply.isExtra__actorCanModify() == false) {
+			return rq.historyBackJsOnView(Ut.f("%d번 댓글을 수정할 권한이 없습니다.", id));
+		}
+
+		String relDataTitle = null;
+
+		switch (reply.getRelTypeCode()) {
+		case "article":
+			Article article = articleService.getArticle(reply.getRelId());
+			relDataTitle = article.getTitle();
+		}
+
+		model.addAttribute("relDataTitle", relDataTitle);
+		model.addAttribute("reply", reply);
+
+		return "usr/reply/modify";
 	}
 
 	@RequestMapping("/usr/reply/doWrite")
