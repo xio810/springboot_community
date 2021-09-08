@@ -36,9 +36,10 @@ public interface ReplyRepository {
 			ON R.memberId = M.id
 			WHERE R.relTypeCode = #{relTypeCode}
 			AND R.relId = #{relId}
-			ORDER BY R.id DESC
+			ORDER BY R.id
 			""")
 	public List<Reply> getForPrintReplies(String relTypeCode, int relId);
+	// List<Reply>는 댓글 리스트 출력 -> order by id desc 였는데 desc 삭제
 
 	@Select("""
 			SELECT R.*,

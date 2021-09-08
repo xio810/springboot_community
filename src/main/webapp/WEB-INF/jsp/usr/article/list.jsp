@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="${board.name} 게시물 리스트" />
+<c:set var="pageTitle" value="커뮤니티 ${board.name} 게시물 리스트" />
 <%@ include file="../common/head.jspf"%>
 
 <!-- 시작 -->
@@ -66,7 +66,9 @@
               <td>${article.goodReactionPoint}</td>
               <td>${article.extra__writerName}</td>
               <td>
-                <a class="btn-text-link block w-full truncate" href="../article/detail?id=${article.id}">${article.title}</a>
+                <a class="btn-text-link block w-full truncate" href="../article/detail?id=${article.id}">
+                ${article.title}
+                 </a>
               </td>
             </tr>
           </c:forEach>
@@ -74,7 +76,7 @@
       </table>
     </div>
 
-    <!-- 게시물 숫자 -->
+    <!-- 게시물 page 숫자 -->
     <div class="page-menu mt-3">
       <div class="btn-group justify-center">
         <c:set var="pageMenuArmLen" value="6" />

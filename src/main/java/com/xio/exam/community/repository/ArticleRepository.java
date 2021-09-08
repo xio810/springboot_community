@@ -67,7 +67,8 @@ public interface ArticleRepository {
 			""")
 	public List<Article> getForPrintArticles(int boardId, String searchKeywordTypeCode, String searchKeyword,
 			int limitStart, int limitTake);
-
+	//List<Article> 은 게시물 리스트 출력 
+	
 	public int getLastInsertId();
 
 	@Select("""
