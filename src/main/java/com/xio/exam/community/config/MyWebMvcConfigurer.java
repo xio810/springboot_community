@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.xio.exam.community.interceptor.BeforeActionInterceptor;
 import com.xio.exam.community.interceptor.NeedLoginInterceptor;
+import com.xio.exam.community.interceptor.NeedLogoutInterceptor;
 
 @Configuration
 public class MyWebMvcConfigurer implements WebMvcConfigurer {
@@ -18,6 +19,10 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 	// needLoginInterceptor 인터셉터 불러오기
 	@Autowired
 	NeedLoginInterceptor needLoginInterceptor;
+
+	// needLogoutInterceptor 인터셉터 불러오기
+	@Autowired
+	NeedLogoutInterceptor needLogoutInterceptor;
 
 	// 이 함수는 인터셉터를 적용하는 역할을 합니다.
 	@Override
@@ -52,5 +57,15 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		ir.addPathPatterns("/usr/reactionPoint/doBadReaction");
 		ir.addPathPatterns("/usr/reactionPoint/doCancelGoodReaction");
 		ir.addPathPatterns("/usr/reactionPoint/doCancelBadReaction");
+
+		ir = registry.addInterceptor(needLogoutInterceptor);
+		ir.addPathPatterns("/usr/member/join");
+		ir.addPathPatterns("/usr/member/doJoin");
+		ir.addPathPatterns("/usr/member/login");
+		ir.addPathPatterns("/usr/member/doLogin");
+		ir.addPathPatterns("/usr/member/findLoginId");
+		ir.addPathPatterns("/usr/member/doFindLoginId");
+		ir.addPathPatterns("/usr/member/findLoginPw");
+		ir.addPathPatterns("/usr/member/doFindLoginPw");
 	}
 }
