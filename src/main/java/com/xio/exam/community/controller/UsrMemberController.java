@@ -21,41 +21,46 @@ public class UsrMemberController {
 		this.memberService = memberService;
 		this.rq = rq;
 	}
-
-	@RequestMapping("/usr/member/doJoin")
-	@ResponseBody
-	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
-			String email) {
-		//
-		if (Ut.empty(loginId)) {
-			return ResultData.from("F-1", "loginId를 입력해 주세요");
-		}
-		if (Ut.empty(loginPw)) {
-			return ResultData.from("F-2", "loginPw를 입력해 주세요");
-		}
-		if (Ut.empty(name)) {
-			return ResultData.from("F-3", "name을 입력해 주세요");
-		}
-		if (Ut.empty(nickname)) {
-			return ResultData.from("F-4", "nickname을 입력해 주세요");
-		}
-		if (Ut.empty(cellphoneNo)) {
-			return ResultData.from("F-5", "cellphoneNo를 입력해 주세요");
-		}
-		if (Ut.empty(email)) {
-			return ResultData.from("F-6", "e-mail을 입력해 주세요");
-		}
-		//
-
-		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
-
-		if (joinRd.isFail()) {
-			return (ResultData) joinRd;
-		}
-
-		Member member = memberService.getMemberById(joinRd.getData1());
-		return ResultData.newData(joinRd, "member", member);
+	
+	@RequestMapping("/usr/member/join")
+	public String showJoin(HttpSession httpSession) {
+		return "/usr/member/join";
 	}
+
+//	@RequestMapping("/usr/member/doJoin")
+//	@ResponseBody
+//	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
+//			String email) {
+//		//
+//		if (Ut.empty(loginId)) {
+//			return ResultData.from("F-1", "loginId를 입력해 주세요");
+//		}
+//		if (Ut.empty(loginPw)) {
+//			return ResultData.from("F-2", "loginPw를 입력해 주세요");
+//		}
+//		if (Ut.empty(name)) {
+//			return ResultData.from("F-3", "name을 입력해 주세요");
+//		}
+//		if (Ut.empty(nickname)) {
+//			return ResultData.from("F-4", "nickname을 입력해 주세요");
+//		}
+//		if (Ut.empty(cellphoneNo)) {
+//			return ResultData.from("F-5", "cellphoneNo를 입력해 주세요");
+//		}
+//		if (Ut.empty(email)) {
+//			return ResultData.from("F-6", "e-mail을 입력해 주세요");
+//		}
+//		//
+//
+//		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
+//
+//		if (joinRd.isFail()) {
+//			return (ResultData) joinRd;
+//		}
+//
+//		Member member = memberService.getMemberById(joinRd.getData1());
+//		return ResultData.newData(joinRd, "member", member);
+//	}
 
 	@RequestMapping("/usr/member/login")
 	public String showLogin(HttpSession httpSession) {

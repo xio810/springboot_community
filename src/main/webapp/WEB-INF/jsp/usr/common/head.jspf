@@ -4,7 +4,8 @@
 <html lang="ko" class="light" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<title>${pageTitle}</title>
+<%-- <title>${pageTitle}</title> --%>
+<title>커뮤니티 포트폴리오 사이트</title>
 
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -41,7 +42,7 @@
         </li>
         <li>
           <a class="h-full flex px-3 items-center hover:underline" href="/usr/article/write">
-            <span>작성</span>
+            <span>글 작성</span>
           </a>
         </li>
         <li>
@@ -58,6 +59,13 @@
           <li>
             <a class="h-full flex px-3 items-center hover:underline" href="/usr/member/login">
               <span>로그인</span>
+            </a>
+          </li>
+        </c:if>
+         <c:if test="${!rq.isLogined()}">
+          <li>
+            <a class="h-full flex px-3 items-center hover:underline" href="/usr/member/join">
+              <span>회원가입</span>
             </a>
           </li>
         </c:if>
