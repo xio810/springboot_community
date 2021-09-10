@@ -33,7 +33,7 @@ public interface MemberRepository {
 			WHERE M.id = #{id}
 			""")
 	Member getMemberById(@Param("id") int id);
-	
+
 	@Select("""
 			SELECT *
 			FROM `member` AS M
@@ -48,5 +48,31 @@ public interface MemberRepository {
 			and M.email = #{email}
 			""")
 	Member getMemberByNameAndEmail(@Param("name") String name, @Param("email") String email);
-	
+
+	@Select("""
+			<script>
+			UPDATE `member`
+			<set>
+				updateDate = NOW(),
+				<if test="loginPw != null">
+				loginPw = #{loginPw},
+				</if>
+				<if test="name != null">
+				name = #{name},
+				</if>
+				<if test="nickname != null">
+				nickname = #{nickname},
+				</if>
+				<if test="email != null">
+				email = #{email},
+				</if>
+				<if test="cellphoneNo != null">
+				cellphoneNo = #{cellphoneNo},
+				</if>
+			</set>
+			WHERE id = #{id}
+			</script>
+			""")
+	void modify(int id, String loginPw, String name, String nickname, String email, String cellphoneNo);
+
 }
